@@ -1,0 +1,2 @@
+dpkg-divert --add --package dainslef-cloud-environment-config --rename --divert /etc/shadowsocks-libev/config.json.custom /etc/shadowsocks-libev/config.json
+dpkg-divert --add --package dainslef-cloud-environment-config --rename --divert /etc/trojan/config.json.custom /etc/trojan/config.json

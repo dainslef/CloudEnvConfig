@@ -1,0 +1,25 @@
+{
+	"run_type": "server",
+	"local_addr": "0.0.0.0",
+	"local_port": $TROJAN_PORT,
+	"password": [
+		"$TROJAN_PASSWORD"
+	],
+	"log_level": 1,
+	"ssl": {
+		"cert": "/etc/trojan/certificate.crt",
+		"key": "/etc/trojan/private_key",
+		"alpn": [
+			"h2",
+			"http/1.1"
+		]
+	},
+	"tcp": {
+		"prefer_ipv4": false,
+		"no_delay": true,
+		"keep_alive": true,
+		"reuse_port": true,
+		"fast_open": true,
+		"fast_open_qlen": 20
+	}
+}

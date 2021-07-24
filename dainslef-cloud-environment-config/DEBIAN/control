@@ -1,0 +1,8 @@
+Package: dainslef-cloud-environment-config
+Version: 1.0
+Section: base
+Priority: optional
+Architecture: all
+Depends: nginx (>= 1.0), fish, neofetch, trojan (>= 1.0), shadowsocks-libev, syncthing, ubuntu-minimal, ubuntu-server, ubuntu-standard
+Maintainer: Dainslef Tei <dainslef@outlook.com>
+Description: This is a cloud environment config package.

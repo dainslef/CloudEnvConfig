@@ -1,0 +1,19 @@
+Template: dainslef-cloud-environment-config/set_trojan_port
+Type: string
+Default: 10000
+Description: Set the port of trojan proxy server.
+
+Template: dainslef-cloud-environment-config/set_trojan_password
+Type: string
+Default: 123456
+Description: Set the password of trojan proxy server.
+
+Template: dainslef-cloud-environment-config/set_shadowsocks_port
+Type: string
+Default: 10001
+Description: Set the port of shadowsocks proxy server.
+
+Template: dainslef-cloud-environment-config/set_shadowsocks_password
+Type: string
+Default: 123456
+Description: Set the password of shadowsocks proxy server.
