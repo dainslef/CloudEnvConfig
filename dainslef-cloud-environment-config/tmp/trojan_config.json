@@ -8,10 +8,10 @@
 	"log_level": 1,
 	"ssl": {
 		"cert": "/etc/trojan/certificate.crt",
-		"key": "/etc/trojan/private_key",
+		"key": "/etc/trojan/private.key",
 		"alpn": [
-			"h2",
-			"http/1.1"
+			"http/1.1",
+			"h2"
 		]
 	},
 	"tcp": {
