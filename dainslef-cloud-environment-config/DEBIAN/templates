@@ -17,3 +17,8 @@ Template: dainslef-cloud-environment-config/set_shadowsocks_password
 Type: string
 Default: 123456
 Description: Set the password of shadowsocks proxy server.
+
+Template: dainslef-cloud-environment-config/set_default_user
+Type: string
+Default: ubuntu
+Description: Set the default user account.

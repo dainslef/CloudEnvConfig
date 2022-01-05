@@ -2,12 +2,12 @@
 
 export DEBCONF_DEBUG=developer
 
-# inlcude debconf lib, current script will be reload after include lib
+# import debconf lib, current script will be reload after include lib
 . /usr/share/debconf/confmodule
 
 # use debconf to execute template, show the question dialog
 run_template() {
-	db_fset $1 seen false
+	# db_fset $1 seen false # don't make TUI always show
 	db_input high $1
 	db_go
 	db_get $1
@@ -16,16 +16,20 @@ run_template() {
 
 echo "Running with config: $1 $2" # output shouldn't place before the debconf library include
 
-# For Trojan service config
+# for Trojan service config
 run_template dainslef-cloud-environment-config/set_trojan_port TROJAN_PORT
 run_template dainslef-cloud-environment-config/set_trojan_password TROJAN_PASSWORD
 envsubst < /tmp/trojan_config.json > /etc/trojan/config.json
 
-# For Shadowsocks service config
+# for Shadowsocks service config
 run_template dainslef-cloud-environment-config/set_shadowsocks_port SHADOWSOCKS_PORT
 run_template dainslef-cloud-environment-config/set_shadowsocks_password SHADOWSOCKS_PASSWORD
 envsubst < /tmp/shadowsocks_config.json > /etc/shadowsocks-libev/config.json
 
-# Restart service to reload service config
-systemctl restart trojan shadowsocks-libev
-systemctl enable trojan shadowsocks-libev
+# for Syncthing service config
+run_template dainslef-cloud-environment-config/set_default_user DEFAULT_USER
+loginctl enable-linger $DEFAULT_USER
+
+# restart service to reload service config
+systemctl restart trojan shadowsocks-libev syncthing@$DEFAULT_USER
+systemctl enable trojan shadowsocks-libev syncthing@$DEFAULT_USER
