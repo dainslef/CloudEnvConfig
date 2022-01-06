@@ -1,0 +1,44 @@
+- hosts: hostname # need to write the correct host
+  become: yes
+  become_user: root
+  tasks:
+    - name: copy package
+      copy:
+        src: dainslef-cloud-environment-config.deb
+        dest: /tmp/dainslef-cloud-environment-config.deb
+    - name: unpack package # just unpack the package but not insatll
+      register: out
+      shell: dpkg --unpack /tmp/dainslef-cloud-environment-config.deb
+    - debug: msg="{{ out.stdout_lines }}"
+    - name: set the package debconf password value
+      debconf:
+        name: dainslef-cloud-environment-config
+        question: "{{ item }}"
+        vtype: string
+        value: 123456 # need to change the password
+      with_items:
+        - dainslef-cloud-environment-config/set_trojan_password
+        - dainslef-cloud-environment-config/set_shadowsocks_password
+    - name: set the package debconf port value and user info
+      debconf:
+        name: dainslef-cloud-environment-config
+        question: "{{ item.question }}"
+        vtype: string
+        value: "{{ item.value }}"
+      with_items:
+        - {
+            question: dainslef-cloud-environment-config/set_trojan_port,
+            value: 443,
+          }
+        - {
+            question: dainslef-cloud-environment-config/set_shadowsocks_port,
+            value: 444,
+          }
+        - {
+            question: dainslef-cloud-environment-config/set_default_user,
+            value: ubuntu, # check if need to change the default user
+          }
+    - name: install and update depends
+      shell: apt update; apt install -fy;
+      register: out
+    - debug: msg="{{ out.stdout_lines }}"
