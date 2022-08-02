@@ -33,3 +33,6 @@ loginctl enable-linger $DEFAULT_USER
 # restart service to reload service config
 systemctl restart trojan shadowsocks-libev syncthing@$DEFAULT_USER
 systemctl enable trojan shadowsocks-libev syncthing@$DEFAULT_USER
+
+# restart nginx to load clash resources proxy
+systemctl restart nginx

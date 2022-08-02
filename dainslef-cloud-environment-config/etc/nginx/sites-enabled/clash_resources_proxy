@@ -1,0 +1,15 @@
+server {
+	listen 9999;
+	# Deny the default root path.
+	location / {
+		deny all;
+	}
+	# Provide proxy for ssrsub.
+	location /ssrsub {
+		proxy_pass https://raw.githubusercontent.com/ssrsub/ssr/master/Clash.yml;
+	}
+	# Provide proxy for clash rules.
+	location /clash-rules/ {
+		proxy_pass https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/;
+	}
+}

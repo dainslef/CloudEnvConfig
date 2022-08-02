@@ -1,5 +1,5 @@
-- hosts: hostname # need to write the correct host
-  become: yes
+- hosts: hostname # NEED to write the real host
+  become: true
   become_user: root
   tasks:
     - name: copy package
@@ -15,7 +15,7 @@
         name: dainslef-cloud-environment-config
         question: "{{ item }}"
         vtype: string
-        value: 123456 # need to change the password
+        value: 123456 # NEED to change the password
       with_items:
         - dainslef-cloud-environment-config/set_trojan_password
         - dainslef-cloud-environment-config/set_shadowsocks_password
